@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using Microsoft.EntityFrameworkCore;
+
+
 namespace social_api
 {
     public class Startup
@@ -25,6 +28,13 @@ namespace social_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(opt =>
+            {
+                opt.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")
+                );
+
+            });
             services.AddControllers();
         }
 
@@ -37,11 +47,8 @@ namespace social_api
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

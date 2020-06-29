@@ -1,3 +1,6 @@
 # .NET Core
 bin
 obj
+
+# development resources
+*.db
