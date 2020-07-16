@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 
 
-namespace DatingApp.API.Controllers
+namespace social_api.Routes
 {
     [Route("api/[controller]")]
     [ApiController]

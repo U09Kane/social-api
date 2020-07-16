@@ -23,6 +23,8 @@ namespace social_api
                 {
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
+                    // Add Sample Data
+                    Seed.SeedData(context);
                 }
                 catch(Exception e)
                 {
