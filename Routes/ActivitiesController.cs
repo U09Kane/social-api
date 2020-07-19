@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Activites;
 
+
 namespace Routes {
 
     [Route("api/[controller]")]
@@ -44,6 +45,12 @@ namespace Routes {
         {
             command.Id = id;
             return await _mediator.Send(command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Unit>> Delete(Guid id)
+        {
+            return await _mediator.Send(new Delete.Command{Id = id});
         }
     }
 }
