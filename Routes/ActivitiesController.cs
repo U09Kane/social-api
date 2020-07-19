@@ -27,10 +27,23 @@ namespace Routes {
             return await _mediator.Send(new List.Query());
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Unit>> Create(Create.Command command)
+        {
+            return await _mediator.Send(command);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> Detail(Guid id)
         {
             return await _mediator.Send(new Details.Query{Id = id});
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Unit>> Edit(Edit.Command command, Guid id)
+        {
+            command.Id = id;
+            return await _mediator.Send(command);
         }
     }
 }
