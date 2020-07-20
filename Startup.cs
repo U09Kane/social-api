@@ -36,6 +36,15 @@ namespace social_api
                 );
 
             });
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                });
+            });
             services.AddControllers();
             services.AddMediatR(typeof(List.Handler).Assembly);
         }
@@ -46,6 +55,7 @@ namespace social_api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors("CorsPolicy");
             }
 
             app.UseHttpsRedirection();
